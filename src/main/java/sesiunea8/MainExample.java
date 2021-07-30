@@ -9,8 +9,8 @@ public class MainExample {
         printName(1);
     }
 
-    public static void printName(int i){
-        System.out.println("nu este un nume");
+    public static void printName(int i) {
+        System.out.println("Nu este un nume");
     }
 
     public static void printName(String name) {
