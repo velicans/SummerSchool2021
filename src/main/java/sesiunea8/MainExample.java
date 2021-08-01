@@ -7,6 +7,7 @@ public class MainExample {
         printName("sorin");
         printName("alex");
         printName(1);
+        System.out.println("Andreea Iacob");
     }
 
     public static void printName(int i){
