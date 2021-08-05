@@ -23,4 +23,11 @@ public class Fish extends Animal {
     public void makeSound() {
         System.out.println("fhhh fhhh.....");
     }
+
+    @Override
+    public String toString() {
+        return "Fish " +
+                "name= " + name + '\'' +
+                '}';
+    }
 }

@@ -54,7 +54,7 @@ public class Test {
     @org.junit.Test
     public void arrays2() {
 
-        String cars[] = {"audi", "bentley", "citroen"};
+        String[] cars = {"audi", "bentley", "citroen"};
         System.out.println(cars.length);
 
         System.out.println(cars[0]);
@@ -100,6 +100,7 @@ public class Test {
         System.out.println("peste: " + fish.getAnimalType());
         fish.makeSound();
 
+        System.out.println(fish.toString());
 
     }
 }
