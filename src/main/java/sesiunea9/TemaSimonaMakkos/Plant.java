@@ -1,4 +1,6 @@
 package sesiunea9.TemaSimonaMakkos;
 
-public class Plant {
+public abstract class Plant {
+
+
 }
