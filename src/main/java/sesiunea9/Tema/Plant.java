@@ -1,14 +1,13 @@
 package sesiunea9.Tema;
 
-public class Plant {
+public abstract class Plant {
 
-    private int oxygenProduction;
-
-    public Plant(int oxygenProduction){
-
+    public Plant(int oxygenProduction) {
         this.oxygenProduction = oxygenProduction;
-
     }
+
+    public int oxygenProduction;
+
     public int getOxygenProduction() {
         return oxygenProduction;
     }

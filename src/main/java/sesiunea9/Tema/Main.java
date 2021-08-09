@@ -2,20 +2,26 @@ package sesiunea9.Tema;
 
 public class Main {
 
-    public static void main(String[] args ){
+    public static void main(String[] args) {
 
-        Orange tree = new Orange(50);
-        tree.setAge(10);
-        tree.setHeight(5);
-        tree.setHarvestTime("August");
+        Orange orangeTree = new Orange(50);
+        orangeTree.setAge(10);
+        orangeTree.setHeight(5);
+        orangeTree.setHarvestTime("August");
 
-        Pinidae cedarTree = new Cedar(200);
+        Pinidae cedarTree = new Cedar(100);
+
         System.out.println(cedarTree.numberOfSpecies);
         System.out.println(cedarTree.getGrowthEnvironment());
 
-        Rose rose = new Rose(10);
+        Rose roseAsClassEntity = new Rose(10);
+        Plant roseAsAnonymous = new Plant(10) {
+            @Override
+            public String toString() {
+                return "I am a rose";
+            }
+        };
     }
-
 
 
 }

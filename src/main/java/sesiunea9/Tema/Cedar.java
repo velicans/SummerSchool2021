@@ -1,22 +1,16 @@
 package sesiunea9.Tema;
 
-public class Cedar extends Pinidae implements Eatable{
+public class Cedar extends Pinidae implements Eatable {
 
+    public int numberOfSpecies = 10;
 
     public Cedar(int oxygenProduction) {
         super(oxygenProduction);
     }
 
-
-    {
-        numberOfSpecies = 10;
-    }
-
     @Override
     public String getGrowthEnvironment() {
-        return "Mountain and Mediterranean ";
-
-
+        return super.getGrowthEnvironment() + " and Mediterranean ";
     }
 
     @Override
