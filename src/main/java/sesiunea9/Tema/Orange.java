@@ -1,7 +1,10 @@
 package sesiunea9.Tema;
 
-public class Orange extends Plant implements Fructiferous, Eatable{
+public class Orange extends Plant implements Fructiferous, Eatable {
 
+    private String harvestTime;
+    private int age;
+    private int height;
 
     public Orange(int oxygenProduction) {
         super(oxygenProduction);
@@ -12,17 +15,11 @@ public class Orange extends Plant implements Fructiferous, Eatable{
         return harvestTime;
     }
 
-    public String getHarvestTime() {
-        return harvestTime;
-    }
-
     public void setHarvestTime(String harvestTime) {
         this.harvestTime = harvestTime;
     }
 
-    private String harvestTime;
-    private int age;
-    private int height;
+
 
     public int getAge() {
         return age;
