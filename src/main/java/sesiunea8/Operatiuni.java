@@ -1,13 +1,14 @@
 package sesiunea8;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 public class Operatiuni {
 
     @Test
     public void test2() {
 
-        int i=5;
+        int i = 5;
         printeazaNumar(i);
 
         printeazaNumar(++i);
