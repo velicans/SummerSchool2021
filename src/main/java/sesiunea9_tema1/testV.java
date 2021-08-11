@@ -1,5 +1,7 @@
 package sesiunea9_tema1;
 
+import org.junit.jupiter.api.Test;
+
 import javax.sql.rowset.RowSetFactory;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +9,7 @@ import java.util.HashMap;
 
 public class testV {
 
-    @org.junit.Test
+    @Test
     public void testg() {
         Orange Tree1 = new Orange();
         Tree1.setAge(10);

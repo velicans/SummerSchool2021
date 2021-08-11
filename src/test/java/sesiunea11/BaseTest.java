@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BaseTest {
 
-    public static final String GRAPE_NAME = "france2";
+    public static final String GRAPE_NAME = "Tuta Vinery";
 
     @Test
     public void test() throws InterruptedException {
@@ -34,7 +34,7 @@ public class BaseTest {
         driver.findElement(By.cssSelector(page.name)).sendKeys(GRAPE_NAME);
         Thread.sleep(1000);
         driver.findElement(By.cssSelector(page.age)).clear();
-        driver.findElement(By.cssSelector(page.age)).sendKeys("15");
+        driver.findElement(By.cssSelector(page.age)).sendKeys("20");
         Thread.sleep(1000);
         driver.findElement(By.cssSelector(page.ripeness)).clear();
         driver.findElement(By.cssSelector(page.ripeness)).sendKeys("99");
@@ -61,6 +61,69 @@ public class BaseTest {
                 break;
             }
         }
+        Thread.sleep(1000);
+
+        //homework
+        List<WebElement> rows2 = driver.findElements(By.cssSelector(page.tableRows2));
+
+        for(WebElement row : rows2) {
+            if(row.findElements(By.tagName("td")).get(1).getText().equals(GRAPE_NAME)){
+                row.findElement(By.cssSelector("input[type=checkbox]")).click();
+                break;
+            }
+        }
+
+        Thread.sleep(1000);
+
+        driver.findElement(By.cssSelector(page.fermentButton)).click();
+
+        Thread.sleep(1000);
+
+        // wines
+
+        List<WebElement> rows3 = driver.findElements(By.cssSelector(page.tableRows3));
+
+        for(WebElement row : rows3) {
+            if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
+                row.findElements(By.tagName("button")).get(0).click();
+
+                Thread.sleep(1000);
+
+                row.findElement(By.cssSelector(page.WName)).clear();
+                row.findElement(By.cssSelector(page.WName)).sendKeys("Rosu de Tuta");
+
+                row.findElement(By.xpath(page.okButton)).click();
+                Thread.sleep(1000);
+
+                //row.findElements(By.tagName("button")).get(0).click();
+                //Thread.sleep(1000);
+                //row.findElement(By.cssSelector(page.WBottlingVolume)).clear();
+                //row.findElement(By.cssSelector(page.WBottlingVolume)).sendKeys("5L");
+                //row.findElement(By.xpath(page.okButton)).click();
+                //Thread.sleep(1000);
+
+                break;
+            }
+        }
+
+        //List<WebElement> rows3 = driver.findElements(By.cssSelector(page.tableRows3));
+        rows3 = driver.findElements(By.cssSelector(page.tableRows3));
+
+        for(WebElement row : rows3) {
+            if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
+                row.findElements(By.tagName("button")).get(0).click();
+
+                Thread.sleep(1000);
+
+                row.findElement(By.cssSelector(page.WBottlingVolume)).clear();
+                row.findElement(By.cssSelector(page.WBottlingVolume)).sendKeys("5L");
+
+                row.findElement(By.xpath(page.okButton)).click();
+                Thread.sleep(1000);
+                break;
+            }
+        }
+        Thread.sleep(2000);
 
         driver.quit();
     }
