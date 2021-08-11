@@ -9,4 +9,11 @@ public class WineyardPO {
     public String ripeness = "input#ripeness";
     public String submitBtn = "input[value='Submit']";
     public String tableRows = "table > tbody >tr";
+    public String fermentBtn = "section > button";
+    public String tableRows2 = "table > tbody >tr";
+    public String tableRows3 = "table > tbody >tr";
+    public String wineName = "input[type=text]";
+    public String wineBottlingVolume = "input[type=text]";
+    public String okBtn = "//button[text()=\"OK\"]";
+
 }

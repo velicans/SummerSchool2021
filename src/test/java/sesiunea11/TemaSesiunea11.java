@@ -4,17 +4,18 @@ import com.google.gson.internal.$Gson$Preconditions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.time.Instant;
 import java.util.List;
 
+public class TemaSesiunea11 {
 
-public class BaseTest {
-
-    public static final String GRAPE_NAME = "france2";
+    public static final String GRAPE_NAME = "Chardonnay" + Instant.now();
 
     @Test
     public void test() throws InterruptedException {
@@ -56,6 +57,7 @@ public class BaseTest {
         Thread.sleep(3000);
 
         List<WebElement> rows = driver.findElements(By.cssSelector(page.tableRows));
+
         for(WebElement row : rows) {
             if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
                 row.findElement(By.tagName("button")).click();
@@ -63,6 +65,64 @@ public class BaseTest {
             }
         }
 
+        Thread.sleep(1000);
+
+        List<WebElement> rows2 = driver.findElements(By.cssSelector(page.tableRows2));
+
+        for(WebElement row : rows2) {
+            if(row.findElements(By.tagName("td")).get(1).getText().equals(GRAPE_NAME)){
+                row.findElement(By.cssSelector("input[type=checkbox]")).click();
+                break;
+            }
+        }
+
+        Thread.sleep(1000);
+
+        driver.findElement(By.cssSelector(page.fermentBtn)).click();
+
+        Thread.sleep(1000);
+
+        // struguri
+
+        List<WebElement> rows3 = driver.findElements(By.cssSelector(page.tableRows3));
+
+        for(WebElement row : rows3) {
+            if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
+                row.findElements(By.tagName("button")).get(0).click();
+
+                Thread.sleep(1000);
+
+                row.findElement(By.cssSelector(page.wineName)).clear();
+                row.findElement(By.cssSelector(page.wineName)).sendKeys("Chardonnay");
+
+                row.findElement(By.xpath(page.okBtn)).click();
+                Thread.sleep(1000);
+                break;
+            }
+        }
+
+        rows3 = driver.findElements(By.cssSelector(page.tableRows3));
+
+        for(WebElement row : rows3) {
+            if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
+                row.findElements(By.tagName("button")).get(0).click();
+
+                Thread.sleep(1000);
+
+                row.findElement(By.cssSelector(page.wineBottlingVolume)).clear();
+                row.findElement(By.cssSelector(page.wineBottlingVolume)).sendKeys("0.7");
+
+                row.findElement(By.xpath(page.okBtn)).click();
+                Thread.sleep(1000);
+                break;
+            }
+        }
+
+
+        Thread.sleep(5000);
+
         driver.quit();
     }
+
 }
+
