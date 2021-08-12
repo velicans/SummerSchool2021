@@ -9,4 +9,7 @@ public class WineyardPO {
     public String ripeness = "input#ripeness";
     public String submitBtn = "input[value='Submit']";
     public String tableRows = "table > tbody >tr";
+    public String checkBox = "input[type='checkbox']";
+    public String fermentButton = "button";
+    public String mustMenu = "a[href*=\"must\"]";
 }

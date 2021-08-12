@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BaseTest {
 
-    public static final String GRAPE_NAME = "france2";
+    public static final String GRAPE_NAME = "vinulmeu10";
 
     @Test
     public void test() throws InterruptedException {
@@ -55,13 +55,57 @@ public class BaseTest {
         Thread.sleep(3000);
 
         List<WebElement> rows = driver.findElements(By.cssSelector(page.tableRows));
-        for(WebElement row : rows) {
-            if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
+        for (WebElement row : rows) {
+            if (row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)) {
                 row.findElement(By.tagName("button")).click();
                 break;
             }
+
+        }
+        Thread.sleep(3000);
+
+        driver.findElement(By.cssSelector(page.mustMenu)).click();
+
+        Thread.sleep(3000);
+
+        List<WebElement> rowsMust = driver.findElements(By.cssSelector(page.tableRows));
+
+        int i = 1, j = 1;
+
+        for (WebElement row : rowsMust) {
+            if (row.findElements(By.tagName("td")).get(1).getText().equals(GRAPE_NAME)) {
+                row.findElement(By.xpath("//tr[" + i + "]//input[@type='checkbox']")).click();
+                Thread.sleep(1000);
+                row.findElement(By.xpath("//button[contains(text(),'Ferment')]")).click();
+
+                List<WebElement> rowsWines = driver.findElements(By.cssSelector(page.tableRows));
+                /*for(WebElement row1 : rowsWines){
+                    if(row1.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
+                        row1.findElement(By.xpath("//button[contains(text(),'Set name')]")).click();
+                        Thread.sleep(1000);
+                        row1.findElement(By.xpath("//tr["+ j +"]//input[@type='text']")).clear();
+                        row1.findElement(By.xpath("//tr["+ j +"]//input[@type='text']")).sendKeys("numevinulmeu");
+
+                        break;
+
+
+                    }
+                    else
+                    {
+                        j+=1;
+                    }
+                }*/
+                break;
+            } else {
+                i += 1;
+            }
+
         }
 
+        Thread.sleep(1000);
+
         driver.quit();
+
     }
 }
+
