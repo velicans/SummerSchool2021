@@ -55,8 +55,8 @@ public class BaseTest {
         Thread.sleep(1000);
 
         List<WebElement> rows = driver.findElements(By.cssSelector(page.tableRows));
-        for(WebElement row : rows) {
-            if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
+        for (WebElement row : rows) {
+            if (row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)) {
                 row.findElement(By.tagName("button")).click();
                 break;
             }
