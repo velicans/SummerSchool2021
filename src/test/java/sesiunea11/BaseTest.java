@@ -16,7 +16,7 @@ import java.util.List;
 
 public class BaseTest {
 
-    public static final String GRAPE_NAME = "7";
+    public static final String GRAPE_NAME = "VinDuPlec";
 
     @Test
     public void test() throws InterruptedException {
@@ -100,6 +100,7 @@ public class BaseTest {
             }
         }
 
-        //driver.quit();
+        Thread.sleep(2000);
+        driver.quit();
     }
 }
