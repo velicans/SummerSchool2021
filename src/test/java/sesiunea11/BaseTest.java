@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BaseTest {
 
-    public static final String GRAPE_NAME = "france2";
+    public static final String GRAPE_NAME = "MariusTereu1";
 
     @Test
     public void test() throws InterruptedException {
@@ -26,7 +26,7 @@ public class BaseTest {
 
         Thread.sleep(1000);
         // clicks on Add grapes button
-        driver.findElement(By.cssSelector(page.addGrapesBtn)).click();
+       driver.findElement(By.cssSelector(page.addGrapesBtn)).click();
 
         Thread.sleep(1000);
 
@@ -52,7 +52,9 @@ public class BaseTest {
 
         driver.findElement(By.cssSelector(page.submitBtn)).click();
 
-        Thread.sleep(3000);
+
+
+        Thread.sleep(1000);
 
         List<WebElement> rows = driver.findElements(By.cssSelector(page.tableRows));
         for(WebElement row : rows) {
@@ -62,6 +64,52 @@ public class BaseTest {
             }
         }
 
+        Thread.sleep(1000);
+
+
+        List<WebElement> mustRows = driver.findElements(By.cssSelector(page.tableRows));
+        for(WebElement row : mustRows) {
+            if(row.findElements(By.tagName("td")).get(1).getText().equals(GRAPE_NAME)){
+                row.findElement(By.cssSelector(page.mustCheckbox)).click();
+                break;
+            }
+        }
+
+        Thread.sleep(1000);
+
+        driver.findElement(By.cssSelector(page.fermentBtn)).click();
+
+        Thread.sleep(1000);
+        List<WebElement> wineRows = driver.findElements(By.cssSelector(page.tableRows));
+        for(WebElement row : wineRows) {
+            if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
+                row.findElements(By.tagName("td")).get(3).findElement(By.cssSelector("button")).click();
+                Thread.sleep(1000);
+                row.findElement(By.cssSelector("input")).click();
+                row.findElement(By.cssSelector("input")).sendKeys("struguri bio");
+                row.findElements(By.tagName("td")).get(3).findElement(By.cssSelector("button")).click();
+                 break;
+            }
+        }
+        Thread.sleep(2000);
+
+        List<WebElement> wineBottles = driver.findElements(By.cssSelector(page.tableRows));
+        for (WebElement row :wineBottles) {
+            if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME) ) {
+                row.findElement(By.cssSelector("button")).click();
+                Thread.sleep(2000);
+                row.findElement(By.cssSelector("input")).click();
+                Thread.sleep(1000);
+                row.findElement(By.cssSelector("input")).sendKeys("0.85");
+                Thread.sleep(1000);
+               row.findElement(By.cssSelector("button")).click();
+                break;
+            }
+        }
+
+        Thread.sleep(3000);
         driver.quit();
+
+
     }
 }
