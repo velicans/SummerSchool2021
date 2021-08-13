@@ -7,14 +7,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 
 public class BaseTest {
 
-    public static final String GRAPE_NAME = "vinulmeu10";
+    public static final String GRAPE_NAME = "vinulmeu7";
 
     @Test
     public void test() throws InterruptedException {
@@ -78,23 +80,37 @@ public class BaseTest {
                 Thread.sleep(1000);
                 row.findElement(By.xpath("//button[contains(text(),'Ferment')]")).click();
 
-                List<WebElement> rowsWines = driver.findElements(By.cssSelector(page.tableRows));
-                /*for(WebElement row1 : rowsWines){
+                Thread.sleep(2000);
+
+                WebElement tableWInes = driver.findElement(By.className(page.wineTable));
+                List<WebElement> rowsWines = tableWInes.findElements(By.cssSelector(page.tableRows));
+
+                for(WebElement row1 : rowsWines){
                     if(row1.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
-                        row1.findElement(By.xpath("//button[contains(text(),'Set name')]")).click();
+
+                        row1.findElement(By.cssSelector("button")).click();
+                        row1.findElement(By.xpath("//tr["+ j +"]//td[4]//input[@type='text']")).clear();
+                        row1.findElement(By.xpath("//tr["+ j +"]//td[4]//input[@type='text']")).sendKeys("numevinulmeu");
                         Thread.sleep(1000);
-                        row1.findElement(By.xpath("//tr["+ j +"]//input[@type='text']")).clear();
-                        row1.findElement(By.xpath("//tr["+ j +"]//input[@type='text']")).sendKeys("numevinulmeu");
+                        row1.findElement(By.cssSelector("button")).click();
+
+
+                        /*Thread.sleep(1000);
+                        row1.findElement(By.xpath("//button[contains(text(),'Set')]")).click();
+                        row1.findElement(By.xpath("//tr["+ j +"]//td[5]//input[@type='text']")).clear();
+                        row1.findElement(By.xpath("//tr["+ j +"]//td[5]//input[@type='text']")).sendKeys("volumvinulmeu");
+                        Thread.sleep(1000);
+                        row1.findElement(By.cssSelector("button")).click();*/
+
+                        Thread.sleep(1000);
 
                         break;
-
-
                     }
                     else
                     {
                         j+=1;
                     }
-                }*/
+                }
                 break;
             } else {
                 i += 1;

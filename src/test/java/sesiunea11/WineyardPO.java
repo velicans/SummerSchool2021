@@ -12,4 +12,6 @@ public class WineyardPO {
     public String checkBox = "input[type='checkbox']";
     public String fermentButton = "button";
     public String mustMenu = "a[href*=\"must\"]";
+    public String wineTable = "App-table";
+    public String wineMenu = "a[href*=\"wines\"]";
 }
