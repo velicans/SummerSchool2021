@@ -1,18 +1,21 @@
 package sesiunea9;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Test {
 
-    @org.junit.Test
+public class TestClass {
+
+    @Test
     public void arrays() {
         Dog dog1 = new Dog();
         Dog dog2 = new Dog();
         Dog dog3 = new Dog();
     }
 
-    @org.junit.Test
+    @Test
     public void arrays3() {
         int[][] numbers = {
                 {1, 2, 3, 4},
@@ -22,7 +25,7 @@ public class Test {
         System.out.println(numbers.length);
     }
 
-    @org.junit.Test
+    @Test
     public void arrayList1() {
         ArrayList<String> cars = new ArrayList<String>();
         cars.add("audi");
@@ -39,7 +42,7 @@ public class Test {
 
     }
 
-    @org.junit.Test
+    @Test
     public void hashmap() {
         HashMap<String, String> cars = new HashMap<String, String>();
 
@@ -51,7 +54,7 @@ public class Test {
 
     }
 
-    @org.junit.Test
+    @Test
     public void arrays2() {
 
         String cars[] = {"audi", "bentley", "citroen"};
@@ -66,7 +69,7 @@ public class Test {
     }
 
 
-    @org.junit.Test
+    @Test
     public void test1() {
 
         Dog dog = new Dog();
@@ -82,7 +85,7 @@ public class Test {
 
     }
 
-    @org.junit.Test
+    @Test
     public void test() {
         Dog dog = new Dog();
         dog.setColor("black");
