@@ -27,8 +27,9 @@ public class WineTest extends BaseTest {
     @Test
     public void addNewGrape() {
         int initialValue = winePage.countWines();
-        winePage.addNewGrape();
+        winePage.addNewGrape("Adi", "20", "rows", "10", "97");
         int finalValue = winePage.countWines();
         Assertions.assertTrue(finalValue - initialValue == 1, "New grape was NOT added successfully!");
     }
+
 }
