@@ -151,7 +151,7 @@ public class BaseTest {
                 break;
             }
         }
-        Thread.sleep(3000);
+        Thread.sleep(2500);
 
         driver.quit();
     }
