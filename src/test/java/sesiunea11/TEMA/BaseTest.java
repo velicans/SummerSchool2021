@@ -1,6 +1,6 @@
 package sesiunea11.TEMA;
 
-// ANDREI PAVEN - tema sesiunea 11 - Selenium WebDriver
+// ANDREI PAVEN - Tema sesiunea 11 - Selenium WebDriver
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.Test;
