@@ -1,4 +1,4 @@
-package sesiunea11;
+package sesiunea11.Tema;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.Test;
@@ -7,13 +7,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import sesiunea11.Tema.WineyardPO;
 
 import java.util.List;
 
 
-public class BaseTest {
+public class TestWineyard {
 
-    public static final String GRAPE_NAME = "test wineuc";
+    public static final String GRAPE_NAME = "Vin de testare";
 
     @Test
     public void test() throws InterruptedException {
@@ -25,7 +26,7 @@ public class BaseTest {
 
         Thread.sleep(1000);
 
-    //     clicks on Add grapes button
+        //     clicks on Add grapes button
         driver.findElement(By.cssSelector(page.addGrapesBtn)).click();
 
         Thread.sleep(2000);
@@ -66,8 +67,8 @@ public class BaseTest {
         Thread.sleep(1000);
 
 
-        List<WebElement> mustrows = driver.findElements(By.cssSelector(page.mustRows));
-        for(WebElement row : mustrows) {
+        List<WebElement> mustTableRows = driver.findElements(By.cssSelector(page.mustTableRows));
+        for(WebElement row : mustTableRows) {
             if(row.findElements(By.tagName("td")).get(1).getText().equals(GRAPE_NAME)){
                 row.findElement(By.cssSelector("input")).click();
 
@@ -80,8 +81,8 @@ public class BaseTest {
         driver.findElement(By.cssSelector(page.fermentBtn)).click();
 
         Thread.sleep(1000);
-        List<WebElement> winerows = driver.findElements(By.cssSelector(page.wineRows));
-        for(WebElement row : winerows) {
+        List<WebElement> wineTableRows = driver.findElements(By.cssSelector(page.wineTableRows));
+        for(WebElement row : wineTableRows) {
             if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)){
                 row.findElement(By.cssSelector("button")).click();
                 Thread.sleep(1000);
@@ -93,7 +94,7 @@ public class BaseTest {
         }
         Thread.sleep(2000);
 
-        List<WebElement> bottles = driver.findElements(By.cssSelector(page.wineRows2));
+        List<WebElement> bottles = driver.findElements(By.cssSelector(page.wineFinalTableRows));
         for (WebElement row : bottles) {
             if(row.findElements(By.tagName("td")).get(0).getText().equals(GRAPE_NAME)) {
                 row.findElement(By.cssSelector("button")).click();
