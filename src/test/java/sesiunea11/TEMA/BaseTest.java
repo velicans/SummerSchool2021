@@ -87,8 +87,8 @@ public class BaseTest {
         Thread.sleep(2000);
 
 
-        // Iterate through a list of table rows on the Must page, find our GRAPE_NAME on column 1,
-        // select corresponding checkbox on column 0
+        // Iterate through a list of found table rows on the Must page, find our GRAPE_NAME on column 1,
+        // tick corresponding checkbox on column 0
 
         List<WebElement> rows_must = driver.findElements(By.cssSelector(page.tableRows_Must));
 
@@ -101,13 +101,13 @@ public class BaseTest {
         Thread.sleep(2000);
 
 
-        // Finding and clicking the "Ferment 1 must" button
+        // Find and click the "Ferment 1 must" button
 
         driver.findElement(By.cssSelector(page.ferment_Btn)).click();
         Thread.sleep(2000);
 
 
-        // Iterating through a list of table rows on the Wine cellar page, find our GRAPE_NAME on column 0,
+        // Iterate through a list of found table rows on the Wine cellar page, find our GRAPE_NAME on column 0,
         // find corresponding "Set name" button and click it and insert required text
 
         List<WebElement> rows_Wine = driver.findElements(By.cssSelector(page.tableRows_Wine));
@@ -118,11 +118,11 @@ public class BaseTest {
 
                 Thread.sleep(2000);
 
-                // Setting up name
+                // Set up name
                 row.findElement(By.cssSelector(page.wine_Name)).clear();
                 row.findElement(By.cssSelector(page.wine_Name)).sendKeys("Tempranillo_Red");
 
-                // Pressing the OK button
+                // Press the OK button for saving name
                 row.findElement(By.cssSelector(page.ok_Btn_1)).click();
                 Thread.sleep(2000);
                 break;
@@ -130,7 +130,7 @@ public class BaseTest {
         }
 
 
-        // Iterate through a list of table rows on the Wine cellar page, find our GRAPE_NAME on column 0,
+        // Iterate through a list of found table rows on the Wine cellar page, find our GRAPE_NAME on column 0,
         // find corresponding "Set bottlingVolume" button, click it and insert required value
 
         rows_Wine = driver.findElements(By.cssSelector(page.tableRows_Wine));
@@ -141,11 +141,11 @@ public class BaseTest {
 
                 Thread.sleep(2000);
 
-                // Setting the bottling volume
+                // Set the bottling volume
                 row.findElement(By.cssSelector(page.bottling_Volume)).clear();
                 row.findElement(By.cssSelector(page.bottling_Volume)).sendKeys("0,75L");
 
-                // Pressing the button for saving the bottling volume
+                // Press the OK button for saving the bottling volume
                 row.findElement(By.cssSelector(page.ok_Btn_2)).click();
                 Thread.sleep(2000);
                 break;
