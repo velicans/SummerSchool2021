@@ -19,15 +19,16 @@ public class WineTest extends BaseTest {
         Assertions.assertTrue(isOpened, "Home page did NOT open successfully!");
     }
 
-    @Test
-    public void areTenWines() {
-        Assertions.assertTrue(winePage.countWines() == 11, "There is a different number of wines in list: " + winePage.countWines());
-    }
+//    @Test
+//    public void areTenWines() {
+//        Assertions.assertTrue(winePage.countWines() == 11, "There is a different number of wines in list: " + winePage.countWines());
+//    }
 
     @Test
     public void addNewGrape() {
         int initialValue = winePage.countWines();
         winePage.addNewGrape();
+        
         int finalValue = winePage.countWines();
         Assertions.assertTrue(finalValue - initialValue == 1, "New grape was NOT added successfully!");
     }

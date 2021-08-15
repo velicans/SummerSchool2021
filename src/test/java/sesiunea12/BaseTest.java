@@ -25,10 +25,10 @@ public class BaseTest {
         driver.manage().window().maximize();
     }
 
-    @AfterAll
-    public static void tearDown() {
-        driver.quit();
-    }
+//    @AfterAll
+//    public static void tearDown() {
+//        driver.quit();
+//    }
 
     public static void takeScreenShot(WebDriver driver, String pathToFile) throws Exception {
         TakesScreenshot screenshot = ((TakesScreenshot) driver);
