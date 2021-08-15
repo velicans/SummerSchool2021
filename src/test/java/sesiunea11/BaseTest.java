@@ -16,7 +16,7 @@ import java.util.List;
 
 public class BaseTest {
 
-    public static final String GRAPE_NAME = "vinulmeu7";
+    public static final String GRAPE_NAME = "vinulmeu10";
 
     @Test
     public void test() throws InterruptedException {

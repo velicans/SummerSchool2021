@@ -76,5 +76,7 @@
     <orderEntry type="library" name="Maven: com.jayway.restassured:rest-assured-common:2.9.0" level="project" />
     <orderEntry type="library" name="Maven: com.jayway.restassured:xml-path:2.9.0" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.20" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.testng:testng:7.4.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.webjars:jquery:3.5.1" level="project" />
   </component>
 </module>
