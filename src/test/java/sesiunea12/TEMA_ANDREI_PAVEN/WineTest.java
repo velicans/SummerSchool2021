@@ -56,25 +56,19 @@ public class WineTest extends BaseTest {
     @Test
 
     public void addNewGrapeType() {
+
         int initialValue = winePage.countWines();
         winePage.addNewGrape(NEW_GRAPE);
         int finalValue = winePage.countWines();
         Assertions.assertEquals(1, finalValue - initialValue, "New grape was NOT added successfully!");
+
+        Assertions.assertTrue(winePage.checkGrapeTotalQuantity(),
+                "Table updates while the total rows value displayed on the grapes page does NOT get updated.");
+
+        Assertions.assertTrue(winePage.checkGrapeTypes(),
+                "Table updates while the total number of types of grapes on the grapes page does NOT get updated.");
     }
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //3. Pick up and crush your newly added grape & check that must count value and must total volume matches the values from the table.

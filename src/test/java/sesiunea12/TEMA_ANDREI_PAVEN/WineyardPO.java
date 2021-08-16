@@ -27,6 +27,7 @@ public class WineyardPO {
     public String grapeType = "li:nth-child(1)";
     public String tableRows = "table > tbody >tr";
 
+    public String grapesRows = "table > tbody >tr";
     public String mustRows = "table > tbody >tr";
     public String fermentBtn = "button";
     public String wineRows = "table > tbody >tr";
@@ -61,7 +62,6 @@ public class WineyardPO {
         wait.until (ExpectedConditions.presenceOfElementLocated (By.cssSelector (quantity)));
         Select quantitySelect = new Select (driver.findElement (By.cssSelector (quantity)));
         quantitySelect.selectByVisibleText ("36");
-
 
         // define select for unit dropdown
         wait.until (ExpectedConditions.presenceOfElementLocated (By.cssSelector (unit)));
@@ -108,7 +108,6 @@ public class WineyardPO {
         int grapeTypes = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(grapeType))).getText().replace("Types of grapes: ",""));
 
         // comparing the types of grapes total value to the total number of realised wines and returning the boolean
-        // if true => each separate type of grape has been used for a distinct wine
         return grapeTypes == countWines();
     }
 
