@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class WineTest extends BaseTest {
 
     WineyardPO winePage = new WineyardPO(driver);
-    public final String NEW_GRAPE = "Southern";
+    public final String NEW_GRAPE = "Southern_sample";
 
     @BeforeEach
     public void openPage() {
@@ -22,7 +22,7 @@ public class WineTest extends BaseTest {
 
     @Test
     public void areTenWines() {
-        Assertions.assertTrue(winePage.countWines() == 11, "There is a different number of wines in list: " + winePage.countWines());
+        Assertions.assertEquals(11, winePage.countWines(), "There is a different number of wines in list: " + winePage.countWines());
     }
 
 //    @Test
@@ -47,14 +47,13 @@ public class WineTest extends BaseTest {
     public void checkGrapeTypesMatch(){
 
         Assertions.assertTrue(winePage.checkGrapeTypes(),
-                "The total number of types of grapes does NOT match the number of distinct wines produced.");
+                "The total number of types of grapes does NOT match the total number of table rows.");
 
     }
 
     //2. Add a new grape of 97% ripeness & and check that both total rows and types of grapes values are updated
 
     @Test
-
     public void addNewGrapeType() {
 
         int initialValue = winePage.countWines();
@@ -62,6 +61,7 @@ public class WineTest extends BaseTest {
         int finalValue = winePage.countWines();
         Assertions.assertEquals(1, finalValue - initialValue, "New grape was NOT added successfully!");
 
+        // Table updates successfully
         Assertions.assertTrue(winePage.checkGrapeTotalQuantity(),
                 "Table updates while the total rows value displayed on the grapes page does NOT get updated.");
 
@@ -69,6 +69,22 @@ public class WineTest extends BaseTest {
                 "Table updates while the total number of types of grapes on the grapes page does NOT get updated.");
     }
 
+    //3. Pick up and crush your newly added grape & check that must count value and must total volume matches the values from the table.
+
+    @Test
+    public void pickAndCrushGrape() {
+
+        // assuming Pick & crush grapes button has any effect on the must page, otherwise, button malfunctions
+        winePage.pickAndCrushGrape(NEW_GRAPE);
+        winePage.navigateToMustPage();
+
+        Assertions.assertTrue(winePage.checkMustCount(),
+                "The must count fails to display the correct value or the table fails to update properly");
+
+        Assertions.assertTrue(winePage.checkMustVolume(),
+                "The must total volume fails to display the correct value or the table fails to update properly");
+
+    }
 }
 
-    //3. Pick up and crush your newly added grape & check that must count value and must total volume matches the values from the table.
+    //4. Select your must and ferment it. Check that wines value and volume value match the data displayed in the table.

@@ -14,7 +14,7 @@ public class WineyardPO {
     public WebDriver driver;
     public WebDriverWait wait;
 
-    // Add grapes page
+
     public String addGrapesBtn = "button.animated-button";
     public String name = "input#name";
     public String quantity = "select#quantity";
@@ -25,13 +25,15 @@ public class WineyardPO {
     public String TotalRows = "li:nth-child(2)";
     public String grapeQuantity = "td:nth-child(2)";
     public String grapeType = "li:nth-child(1)";
+
     public String tableRows = "table > tbody >tr";
 
-    public String grapesRows = "table > tbody >tr";
-    public String mustRows = "table > tbody >tr";
     public String fermentBtn = "button";
-    public String wineRows = "table > tbody >tr";
-    public String wineRows2 = "table > tbody >tr";
+
+    public String mustPage = "a:nth-child(3)";
+    public String mustCount = "li:nth-child(1)";
+    public String mustTotalVolume ="li:nth-child(2)";
+    public String mustVolume = "td:nth-child(3)";
 
     public WineyardPO(WebDriver driver) {
         this.driver = driver;
@@ -47,8 +49,8 @@ public class WineyardPO {
     }
 
     public int countWines(){
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wineRows)));
-        List<WebElement> list = driver.findElements(By.cssSelector(wineRows));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(tableRows)));
+        List<WebElement> list = driver.findElements(By.cssSelector(tableRows));
         return list.size();
     }
 
@@ -66,7 +68,7 @@ public class WineyardPO {
         // define select for unit dropdown
         wait.until (ExpectedConditions.presenceOfElementLocated (By.cssSelector (unit)));
         Select unitSelect = new Select (driver.findElement (By.cssSelector (unit)));
-        unitSelect.selectByVisibleText ("cases");
+        unitSelect.selectByVisibleText ("rows");
 
         wait.until (ExpectedConditions.presenceOfElementLocated (By.cssSelector (age))).clear ();
         wait.until (ExpectedConditions.presenceOfElementLocated (By.cssSelector (age))).sendKeys ("3");
@@ -80,9 +82,9 @@ public class WineyardPO {
     public boolean checkGrapeTotalQuantity() {
 
         // total grape quantities from the table
-        int grapeRowsTableTotalNumber = 0;
+        int grapeRowsTotalTableNumber = 0;
 
-        // total rows displayed value
+        // total rows displayed value on the page
         int totalRowsNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(TotalRows))).getText().replace("Total rows: ",""));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(tableRows)));
 
@@ -91,15 +93,15 @@ public class WineyardPO {
         // defining a list of grapes consisting of table rows to iterate through
         List<WebElement> grapes = driver.findElements(By.cssSelector(tableRows));
 
-        // obtaining the total number of grape rows by iterating through the list above
+        // obtaining the total number of grape rows by iterating through the list above and incrementing (barrows and cases get counted as rows on the page)
         for(WebElement row : grapes) {
-            grapeRowsTableTotalNumber += Integer.parseInt(row.findElement(By.cssSelector(grapeQuantity)).getText().replace(" rows","").replace(" barrows","").replace(" cases",""));
+            grapeRowsTotalTableNumber += Integer.parseInt(row.findElement(By.cssSelector(grapeQuantity)).getText().replace(" rows","").replace(" barrows","").replace(" cases",""));
         }
-        System.out.println(grapeRowsTableTotalNumber);
+        System.out.println(grapeRowsTotalTableNumber);
 
         // comparing the total rows displayed value to the total sum of grape quantities and returning the boolean
         // if true => the value displayed on the page is the sum of the values in the grapes table
-        return grapeRowsTableTotalNumber == totalRowsNumber;
+        return grapeRowsTotalTableNumber == totalRowsNumber;
     }
 
     public boolean checkGrapeTypes(){
@@ -107,8 +109,58 @@ public class WineyardPO {
         // displayed types of grapes total value
         int grapeTypes = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(grapeType))).getText().replace("Types of grapes: ",""));
 
-        // comparing the types of grapes total value to the total number of realised wines and returning the boolean
+        // comparing the types of grapes total value to the total number of rows in the table
         return grapeTypes == countWines();
+    }
+
+    public void pickAndCrushGrape(String grapeName){
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(tableRows)));
+        List<WebElement> grapeList = driver.findElements(By.cssSelector(tableRows));
+
+        for(WebElement row : grapeList) {
+            if (row.findElements(By.tagName("td")).get(0).getText().equals(tableRows))
+                // find the only possible button on the row and click it
+                row.findElement(By.tagName("button")).click();
+                break;
+            }
+        }
+
+
+    public void navigateToMustPage(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mustPage))).click();
+    }
+
+
+    public boolean checkMustCount(){
+
+        // localizing must count number element on must page and extracting value
+        int mustDisplayedNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mustCount))).getText().replace("Must count: ",""));
+
+        // if must count number does not match the number of rows in the current table there is a mismatch
+        return mustDisplayedNumber == countWines();
+
+        }
+
+
+    public boolean checkMustVolume(){
+
+        // localizing must total volume number element on page and extracting value
+        int volumeDisplayedNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mustTotalVolume))).getText().replace("Must total volume: ","").replace(" liters",""));
+
+        int volumeTableValue = 0;
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(tableRows)));
+
+        // creating o list of table rows from the current page, iterating through it, incrementing volumeTableValue
+        List<WebElement> mustList = driver.findElements(By.cssSelector(tableRows));
+        for(WebElement row : mustList) {
+            volumeTableValue += Integer.parseInt(row.findElement(By.cssSelector(mustVolume)).getText().replace(" liters",""));
+        }
+
+        // if the incremented volumeTableValue does not match the volumeDisplayedNumber there is a mismatch
+        return volumeDisplayedNumber == volumeTableValue;
+
     }
 
 }
