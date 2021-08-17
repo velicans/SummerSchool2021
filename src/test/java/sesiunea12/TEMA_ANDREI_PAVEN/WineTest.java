@@ -36,7 +36,7 @@ public class WineTest extends BaseTest {
     //1. Check that total rows value and type of grapes value are matching the values in table.
 
     @Test
-    public void checkGrapeQuantityMatch(){
+    public void checkGrapeQuantityMatch() {
 
         Assertions.assertTrue(winePage.checkGrapeTotalQuantity(),
                 "The total rows value displayed on the grapes page does NOT match the total quantity value in the table");
@@ -44,7 +44,7 @@ public class WineTest extends BaseTest {
     }
 
     @Test
-    public void checkGrapeTypesMatch(){
+    public void checkGrapeTypesMatch() {
 
         Assertions.assertTrue(winePage.checkGrapeTypes(),
                 "The total number of types of grapes does NOT match the total number of table rows.");
@@ -82,9 +82,27 @@ public class WineTest extends BaseTest {
                 "The must count fails to display the correct value or the table fails to update properly");
 
         Assertions.assertTrue(winePage.checkMustVolume(),
-                "The must total volume fails to display the correct value or the table fails to update properly");
+                "The must total volume count fails to display the correct value or the table fails to update properly");
 
     }
-}
 
     //4. Select your must and ferment it. Check that wines value and volume value match the data displayed in the table.
+
+    @Test
+    public void selectAndFermentGrape() {
+
+        winePage.navigateToMustPage();
+        // assuming checkbox and ferment button have any effect, otherwise, buttons malfunction
+        winePage.selectAndFermentGrape("black maiden");
+        winePage.navigateToWinePage();
+
+        Assertions.assertTrue(winePage.checkWineCount(),
+                "The wine count fails to display the correct value or the table fails to update properly");
+
+        Assertions.assertTrue(winePage.checkWineVolume(),
+                "The wine total volume count fails to display the correct value or the table fails to update properly");
+    }
+
+    //5.
+}
+
