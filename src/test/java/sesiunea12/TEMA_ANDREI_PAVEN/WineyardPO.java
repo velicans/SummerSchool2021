@@ -209,9 +209,9 @@ public class WineyardPO {
     public boolean checkWineVolume(){
 
         // localizing the wine total volume number element on page and extracting value
-        float winesDisplayedVolumeNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(winesTotalVolume))).getText().replace("Volume: ","").replace(" liters",""));
+        int winesDisplayedVolumeNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(winesTotalVolume))).getText().replace("Volume: ","").replace(" liters",""));
 
-        float winesVolumeTableNumber = 0;
+        int winesVolumeTableNumber = 0;
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(tableRows)));
 
