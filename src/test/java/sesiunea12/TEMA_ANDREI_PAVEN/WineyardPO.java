@@ -31,6 +31,8 @@ public class WineyardPO {
     public String checkBoxBtn = "input[type=checkbox]";
     public String fermentBtn = "button";
 
+    public String grapePage = "a:nth-child(1)";
+
     public String mustPage = "a:nth-child(3)";
 
     public String mustCount = "li:nth-child(1)";
@@ -135,6 +137,10 @@ public class WineyardPO {
             }
         }
 
+    public void navigateToGrapePage(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(grapePage))).click();
+    }
+
     public void navigateToMustPage(){
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mustPage))).click();
     }
@@ -200,13 +206,12 @@ public class WineyardPO {
         return winesDisplayedNumber == countWines();
     }
 
-
     public boolean checkWineVolume(){
 
         // localizing the wine total volume number element on page and extracting value
-        int winesDisplayedVolumeNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(winesTotalVolume))).getText().replace("Volume: ","").replace(" liters",""));
+        float winesDisplayedVolumeNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(winesTotalVolume))).getText().replace("Volume: ","").replace(" liters",""));
 
-        int winesVolumeTableNumber = 0;
+        float winesVolumeTableNumber = 0;
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(tableRows)));
 
@@ -220,4 +225,31 @@ public class WineyardPO {
         return winesDisplayedVolumeNumber == winesVolumeTableNumber;
     }
 
+    public boolean isMustDeleted(String grapeName){
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(tableRows)));
+        List<WebElement> mustList = driver.findElements(By.cssSelector(tableRows));
+
+        // create a list of table rows from the current page, iterate through it, if myGrape is found, it has not been removed from the table
+        for(WebElement row : mustList) {
+            if(row.findElements(By.tagName("td")).get(1).getText().equals(grapeName)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isGrapeDeleted(String grapeName){
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(tableRows)));
+        List<WebElement> grapeList = driver.findElements(By.cssSelector(tableRows));
+
+        // create a list of table rows from the current page, iterate through it, if myGrape is found, it has not been removed from the table
+        for(WebElement row : grapeList) {
+            if(row.findElements(By.tagName("td")).get(0).getText().equals(grapeName)){
+                return false;
+            }
+        }
+        return true;
+    }
 }

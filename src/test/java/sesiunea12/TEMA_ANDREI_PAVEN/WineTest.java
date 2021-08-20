@@ -60,8 +60,8 @@ public class WineTest extends BaseTest {
         winePage.addNewGrape(NEW_GRAPE);
         int finalValue = winePage.countWines();
         Assertions.assertEquals(1, finalValue - initialValue, "New grape was NOT added successfully!");
+        // Once table updates successfully =>
 
-        // Table updates successfully
         Assertions.assertTrue(winePage.checkGrapeTotalQuantity(),
                 "Table updates while the total rows value displayed on the grapes page does NOT get updated.");
 
@@ -93,7 +93,7 @@ public class WineTest extends BaseTest {
 
         winePage.navigateToMustPage();
         // assuming checkbox and ferment button have any effect, otherwise, buttons malfunction
-        winePage.selectAndFermentGrape("black maiden");
+        winePage.selectAndFermentGrape(NEW_GRAPE);
         winePage.navigateToWinePage();
 
         Assertions.assertTrue(winePage.checkWineCount(),
@@ -103,6 +103,45 @@ public class WineTest extends BaseTest {
                 "The wine total volume count fails to display the correct value or the table fails to update properly");
     }
 
-    //5.
+    //5. Go back to Must page and check that your must is missing and that the values have been updated.
+
+    @Test
+    public void checkMustPage() {
+
+        winePage.navigateToMustPage();
+        Assertions.assertTrue(winePage.isMustDeleted(NEW_GRAPE),
+                "The removal of Must from the table has failed.");
+
+        // if the Must is missing from the table and this test fails => Must is still part of the must count value.
+        Assertions.assertTrue(winePage.checkMustCount(),
+                "The must count fails to display the correct value or the table fails to update properly " +
+                        "(Must is not being removed from the table)");
+
+        // if the Must is missing from the table and this test fails => Must is still part of the must total volume count value.
+        Assertions.assertTrue(winePage.checkMustVolume(),
+                "The must total volume count fails to display the correct value or the table fails to update properly " +
+                        "(Must is not being removed from the table)");
+
+    }
+
+    //6. Go back to Must page and check that your must is missing and that the values have been updated.
+
+    @Test
+    public void checkGrapePage(){
+
+        winePage.navigateToGrapePage();
+        Assertions.assertTrue(winePage.isGrapeDeleted(NEW_GRAPE),
+                "The removal of the newly added grape from the table has failed.");
+
+        // if the newly added grape is missing from the table and this test fails => newly added grape is still part of the must count value.
+        Assertions.assertTrue(winePage.checkGrapeTotalQuantity(),
+                "The total rows value displayed on the grapes page does NOT match the total quantity value in the table");
+
+        // if the newly added grape is missing from the table and this test fails => newly added grape is still part of the Grape Types count value.
+        Assertions.assertTrue(winePage.checkGrapeTypes(),
+                "The total number of types of grapes does NOT match the total number of table rows.");
+
+    }
+
 }
 
