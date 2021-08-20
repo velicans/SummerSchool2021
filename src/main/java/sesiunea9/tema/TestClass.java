@@ -1,8 +1,10 @@
 package sesiunea9.tema;
 
-public class Test {
+import org.junit.jupiter.api.Test;
 
-    @org.junit.Test
+public class TestClass {
+
+    @Test
     public void test() {
 
         //TODO: Create an object: An orange tree, aged 10, of height 5, that is eatable, the time to harvest is August and an oxygen production of 50
