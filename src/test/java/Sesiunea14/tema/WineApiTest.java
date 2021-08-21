@@ -60,9 +60,8 @@ public class WineApiTest {
     @Test
     void testDeleteWine(){
 
-        System.out.println("WINE ID is : " + getWineId(name)[0]);
 
-        deleteWine(name);
+        deleteWine();
 
         System.out.println("=========Wine has been deleted=======");
 
@@ -129,13 +128,12 @@ public class WineApiTest {
         System.out.println(response.prettyPrint());
     }
 
-    private int[] getWineId(String name) {
-        int[] ids = {JsonPath.with(response.prettyPrint()).get("find { must -> must.name == '" + name + "' }.id")};
-        return ids;
+    private int getWineId(String name) {
+        return JsonPath.with(response.prettyPrint()).get("find { must -> must.name == '" + name + "' }.id");
     }
 
-    private void deleteWine(String name){
-        response = RestAssured.given().contentType(ContentType.JSON).when().delete(WINE_URL + "?q=" + getWineId(name));
+    private void deleteWine(){
+        response = RestAssured.given().contentType(ContentType.JSON).when().delete(WINE_URL + "?wineid=" + getWineId(name));
     }
 
 }
