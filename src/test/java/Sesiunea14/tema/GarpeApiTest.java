@@ -1,4 +1,4 @@
-package Sesiunea14;
+package Sesiunea14.tema;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
