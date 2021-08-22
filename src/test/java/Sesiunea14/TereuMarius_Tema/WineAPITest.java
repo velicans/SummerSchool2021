@@ -25,10 +25,10 @@ public class WineAPITest {
 
     private String name, type, bottlingVolume, bottlingVolumePatch, namePatch;
     private String[] composition = new String[1];
-    private int volume ;
+    private int volume;
 
     @BeforeAll
-    void setUp(){
+    void setUp() {
         composition[0] = "MyComposition";
         name = "Wine" + Instant.now();
         type = "sweet";
@@ -40,7 +40,7 @@ public class WineAPITest {
     }
 
     @Test
-    void testAddWine(){
+    void testAddWine() {
 
         addWine(name, type, volume, composition, bottlingVolume);
 
@@ -51,22 +51,22 @@ public class WineAPITest {
     }
 
     @Test
-    void testDeleteWine(){
+    void testDeleteWine() {
 
         System.out.println("Wine ID is : " + getWineId(name)[0]);
         deleteWine(name);
         System.out.println("Wine is removed!");
-       getWineList();
-       assertThat(isWineAvailable(name), is(false));
+        getWineList();
+        assertThat(isWineAvailable(name), is(false));
     }
 
     @Test
-    void testPatchWine(){
+    void testPatchWine() {
         patchWine();
         assertThat(checkIfPatchApplied(), is(true));
     }
 
-    private void addWine(String name, String type, int volume, String[] composition, String bottlingVolume){
+    private void addWine(String name, String type, int volume, String[] composition, String bottlingVolume) {
 
         Map<String, Object> volumeMap = new HashMap<>();
         volumeMap.put("value", volume);
@@ -75,7 +75,7 @@ public class WineAPITest {
         Map<String, Object> wineJson = new HashMap<>();
         wineJson.put("id", new Random().nextInt(99) + 1);
         wineJson.put("name", name);
-        wineJson.put("volume",volumeMap);
+        wineJson.put("volume", volumeMap);
         wineJson.put("type", type);
         wineJson.put("composition", composition);
         wineJson.put("bottlingVolume", bottlingVolume);
@@ -87,18 +87,18 @@ public class WineAPITest {
                 .post(WINE_URL);
     }
 
-    private boolean checkIfPatchApplied(){
+    private boolean checkIfPatchApplied() {
 
         String jsonBottling = JsonPath.with(response.prettyPrint()).get("find { wineItem -> wineItem.name == '" + name + "' }.bottlingVolume");
         String jsonName = JsonPath.with(response.prettyPrint()).get("find { wineItem -> wineItem.name == '" + name + "' }.name");
 
-        if(jsonBottling.equals(bottlingVolume)  || jsonName.equals(name))
+        if (jsonBottling.equals(bottlingVolume) || jsonName.equals(name))
             return false;
         return true;
 
     }
 
-    private void patchWine(){
+    private void patchWine() {
 
         Map<String, String> winePatchMap = new HashMap<>();
         winePatchMap.put("name", namePatch);
@@ -111,7 +111,7 @@ public class WineAPITest {
                 .patch(WINE_URL + "/" + getWineId(name));
     }
 
-    private boolean isWineAvailable(String name){
+    private boolean isWineAvailable(String name) {
         return JsonPath.with(response.prettyPrint()).get("name").toString().contains(name);
     }
 
@@ -128,9 +128,7 @@ public class WineAPITest {
         return ids;
     }
 
-    private void deleteWine(String name){
-        response = RestAssured.given().contentType("*/*").when().delete(WINE_URL + "?q=" + getWineId(name));
+    private void deleteWine(String name) {
+        response = RestAssured.given().contentType("*/*").when().delete(WINE_URL + "?wineid=" + getWineId(name));
     }
-
-
 }
