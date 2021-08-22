@@ -22,6 +22,17 @@ public class WineyardPO {
     public String fermentBtn = "button";
     public String wineRows = "table > tbody >tr";
     public String mustPage = "a:nth-child(3)";
+    public String typeOfGrapes = "li:nth-child(1)";
+    public String totalRows = "li:nth-child(2)";
+    public String grapeQuantity = "td:nth-child(2)";
+    public String mustCount = "li:nth-child(1)";
+    public String mustTotalVolume = "li:nth-child(2)";
+    public String mustVolume = "td:nth-child(3)";
+    public String winePage = "a:nth-child(4)";
+    public String winesCount = "li:nth-child(1)";
+    public String winesTotalVolume = "li:nth-child(2)";
+    public String winesVolume = "td:nth-child(3)";
+
 
     public WineyardPO(WebDriver driver) {
         this.driver = driver;
@@ -167,9 +178,130 @@ public class WineyardPO {
         System.out.println("Your must is missing from Must page");
         return mustMissing;
     }
-//Check that total rows value and type of grapes value are matching the values in table.
-//Check that total rows value and type of grapes value are updated.
-//Check that must count value and must total volume matches the values from the table
-//Check that wines value and volume value matches the data displayed in table.
+
+    //Check that total rows value and type of grapes value are matching the values in table.
+    public boolean checkRowsTypes() {
+
+        boolean rowsTypesMatch = true;
+        int numberOfGrapes = 0;
+        int numberOfRows = 0;
+        int numberOfRowsTable = 0;
+
+        numberOfGrapes = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(typeOfGrapes)))
+                .getText().replace("Types of grapes: ", ""));
+
+        if (numberOfGrapes != countWines()) {
+            rowsTypesMatch = false;
+        }
+
+        if (rowsTypesMatch == true) {
+
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wineRows)));
+            List<WebElement> list = driver.findElements(By.cssSelector(wineRows));
+
+            numberOfRows = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(totalRows)))
+                    .getText().replace("Total rows: ", ""));
+
+            for (WebElement row : list) {
+
+                numberOfRowsTable = numberOfRowsTable + Integer.parseInt(row.findElement(By.cssSelector(grapeQuantity))
+                        .getText().replace(" rows", "").replace(" barrows", "").replace(" cases", ""));
+
+            }
+
+            if (numberOfRows != numberOfRowsTable) {
+                rowsTypesMatch = false;
+            }
+
+        }
+        return rowsTypesMatch;
+    }
+
+
+    //Check that total rows value and type of grapes value are updated.
+
+
+    //move to Wines page
+    public void moveToWinePage(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(winePage))).click();
+    }
+    //Check that wines value and volume value matches the data displayed in table.
+    public boolean checkWinesCountVolume(){
+
+        moveToWinePage();
+
+        boolean winesCountVolumeMatch = true;
+        int numberOfWines = 0;
+        int volumeNumber = 0;
+        int volumeNumberTable = 0;
+
+        numberOfWines = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(winesCount))).getText().replace("Wines: ","").replace(" wines",""));
+
+        if (numberOfWines != countWines()){
+            winesCountVolumeMatch = false;
+        }
+
+        if (winesCountVolumeMatch == true){
+
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wineRows)));
+            List<WebElement> list = driver.findElements(By.cssSelector(wineRows));
+
+            volumeNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(winesTotalVolume))).getText().replace("Volume: ","").replace(" liters",""));
+
+            for(WebElement row : list) {
+
+                volumeNumberTable = volumeNumberTable + Integer.parseInt(row.findElement(By.cssSelector(winesVolume)).getText().replace(" liters",""));
+
+            }
+
+            if(volumeNumber != volumeNumberTable){
+                winesCountVolumeMatch = false;
+            }
+
+        }
+
+        return winesCountVolumeMatch;
+    }
+    //Check that must count value and must total volume matches the values from the table
+    public void moveToMustPage(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mustPage))).click();
+    }
+
+    public boolean checkMustCountVolume() {
+
+        moveToMustPage();
+
+        boolean mustCountVolumeMatch = true;
+        int mustNumber = 0;
+        int volumeNumber = 0;
+        int volumeNumberTable = 0;
+
+        mustNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mustCount))).getText().replace("Must count: ", ""));
+
+        if (mustNumber != countWines()) {
+            mustCountVolumeMatch = false;
+        }
+
+        if (mustCountVolumeMatch == true) {
+
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wineRows)));
+            List<WebElement> list = driver.findElements(By.cssSelector(wineRows));
+
+            volumeNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mustTotalVolume))).getText().replace("Must total volume: ", "").replace(" liters", ""));
+
+            for (WebElement row : list) {
+
+                volumeNumberTable = volumeNumberTable + Integer.parseInt(row.findElement(By.cssSelector(mustVolume)).getText().replace(" liters", ""));
+
+            }
+
+            if (volumeNumber != volumeNumberTable) {
+                mustCountVolumeMatch = false;
+            }
+
+        }
+
+        return mustCountVolumeMatch;
+    }
 
 }

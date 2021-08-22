@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 
 public class BaseTest {
-    public static final String GRAPE_NAME = "Cabernet";
+    public static final String GRAPE_NAME = "Cabernet5";
 
     @Test
     public void test() throws InterruptedException {
