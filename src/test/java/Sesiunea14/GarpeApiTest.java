@@ -28,7 +28,7 @@ public class GarpeApiTest {
         int quantity = 30;
         int ripeness = 97;
         addGrape(name, age, quantity, ripeness);
-        log.info("grape add complete.");
+//        log.info("grape add complete.");
         System.out.println("grape add complete.");
 
         getGrapes();
@@ -69,7 +69,8 @@ public class GarpeApiTest {
                 .when()
                 .get(GRAPE_URL);
 
-        log.info(response.prettyPrint());
+//        log.info(response.prettyPrint());
+        System.out.println(response);
     }
 
     private void addGrape(String name, int age, int quantity, int ripeness) {
@@ -90,7 +91,8 @@ public class GarpeApiTest {
                 .when()
                 .post(GRAPE_URL);
 
-        log.info(response.prettyPrint());
+  //      log.info(response.prettyPrint());
+        System.out.println(response);
 
     }
 }
