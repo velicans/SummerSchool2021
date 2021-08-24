@@ -53,10 +53,14 @@ public class MustApiTest {
 
     private void deleteMust(String mustId) {
 
+        String mustBody;
+        mustBody = "[" + mustId + "]";
+
         response = RestAssured.given()
                 .contentType(ContentType.JSON)
+                .body(mustBody)
                 .when()
-                .delete(MUST_URL + mustId);
+                .delete(MUST_URL);
 
     }
 

@@ -9,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -18,7 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @Slf4j
 public class WineApiTest {
 
-    public static final String WINE_URL = "https://endavawineapp.azurewebsites.net/wines/";
+    public static final String WINE_URL = "https://endavawineapp.azurewebsites.net/wines";
     Response response;
 
     @Test
@@ -26,9 +28,9 @@ public class WineApiTest {
 
         String name = "DanielWine" + Instant.now();
         String bottlingVolume = "0.7";
-        int volume = 300;
+        double volume = 300;
         String unit = "liters";
-        String composition = "sauvignon";
+        List<String> composition = Arrays.asList("sauvignon");
         String type = "dry";
         addWine(name, bottlingVolume, volume, unit, composition, type);
 
@@ -59,7 +61,7 @@ public class WineApiTest {
         response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .when()
-                .delete(WINE_URL + wineId);
+                .delete(WINE_URL + "?wineId=" + wineId);
 
     }
 
@@ -81,7 +83,7 @@ public class WineApiTest {
 
     }
 
-    public void addWine(String name, String bottlingVolume, int volume, String unit, String composition, String type) {
+    public void addWine(String name, String bottlingVolume, double volume, String unit, List<String> composition, String type) {
 
         Map<String, Object> volumeMap = new HashMap<>();
         volumeMap.put("value", volume);
@@ -96,6 +98,7 @@ public class WineApiTest {
 
         response = RestAssured.given()
                 .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
                 .body(bodyMap)
                 .when()
                 .post(WINE_URL);
