@@ -52,11 +52,11 @@ public class WinesApi {
 
     public void checkWineDuplicates() {
 
-        getMusts();
+        getWines();
         assertThat(WINE_NAME + " - Name already used.", isWineAvailable(WINE_NAME), is(false));
     }
 
-    public void getMusts() {
+    public void getWines() {
 
         response = RestAssured.given()
                 .contentType(ContentType.JSON)

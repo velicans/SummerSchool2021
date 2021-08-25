@@ -17,6 +17,7 @@ public class GrapeTest extends BaseTest {
     @AfterAll
     public static void cleanUp() {
         MustApi mustApi = new MustApi();
+        mustApi.getMusts();
         String id = mustApi.getMustId(GRAPE_NAME);
         mustApi.deleteMust(id);
 

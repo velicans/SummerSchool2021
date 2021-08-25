@@ -7,13 +7,15 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
+
 import static Sesiunea15.helpers.Utils.sleep;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MustTest extends BaseTest {
 
-    public static final String GRAPE_NAME = "Cabernet Sauvignon";
+    public static final String GRAPE_NAME = "Cabernet Sauvignon " + Instant.now();
 
 
     @BeforeAll
@@ -26,6 +28,7 @@ public class MustTest extends BaseTest {
     @AfterAll
     public static void cleanUp() {
         WinesApi winesApi = new WinesApi();
+        winesApi.getWines();
         winesApi.deleteWine(GRAPE_NAME);
 
     }
