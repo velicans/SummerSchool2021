@@ -1,0 +1,33 @@
+package sesiunea15.PageObject;
+
+
+import sesiunea15.enums.MenuOptions;
+import sesiunea15.helpers.DriverFactory;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class MenuPO extends BasePO {
+    By grapePage = By.cssSelector("a:nth-child(2)");
+    By mustPage = By.cssSelector("a:nth-child(3)");
+    By winePage = By.cssSelector("a:nth-child(4)");
+
+    public MenuPO() {
+        driver = DriverFactory.getDriver();
+        wait = new WebDriverWait(driver, 10);
+    }
+
+    public void open(MenuOptions option) {
+        switch (option) {
+            case GRAPE:
+                wait.until(ExpectedConditions.presenceOfElementLocated(grapePage)).click();
+                break;
+            case MUST:
+                wait.until(ExpectedConditions.presenceOfElementLocated(mustPage)).click();
+                break;
+            case WINES:
+                wait.until(ExpectedConditions.presenceOfElementLocated(winePage)).click();
+                break;
+        }
+    }
+}
