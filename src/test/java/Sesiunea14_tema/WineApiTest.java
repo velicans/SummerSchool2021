@@ -1,4 +1,4 @@
-package Sesiunea14;
+package Sesiunea14_tema;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -39,12 +39,12 @@ public class WineApiTest {
     }
   }
     ]*/
-        String bottlingVolume = "77";
+        String bottlingVolume = "88";
         /*String composition = "88";*/
         String name = "Wine" + Instant.now();
-        String type = "RosuDeTuta";
+        String type = "RosuDeTuta2";
         int volume = 77;
-        List<String> composition = Arrays.asList("sauvignon");
+        List<String> composition = Arrays.asList("sauvignon2");
 
 
         addWine(bottlingVolume, composition, name, type, volume);
