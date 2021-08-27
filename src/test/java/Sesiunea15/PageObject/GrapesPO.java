@@ -118,5 +118,18 @@ public class GrapesPO extends BasePO {
         return rowsTypesMatch;
     }
 
+    // get the total rows value from column "quantity"
+    public int sumUpGrapeRows(){
+        int totalRows = 0;
+        wait.until(ExpectedConditions.presenceOfElementLocated(tableRows));
+        List<WebElement> rows = driver.findElements(tableRows);
+        for(WebElement row : rows) {
+            if(row.findElements(By.tagName("td")).get(1).getText() != null){
+                String extractedText = row.findElements(By.tagName("td")).get(1).getText();
+                totalRows += Integer.parseInt(extractedText.replaceAll("[^0-9]", ""));
+            }
+        }
+        return totalRows;
+    }
 
 }
