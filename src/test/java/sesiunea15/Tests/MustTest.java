@@ -1,4 +1,5 @@
 package sesiunea15.Tests;
+
 import sesiunea15.Api.MustApi;
 import sesiunea15.Api.WinesApi;
 import sesiunea15.enums.MenuOptions;
@@ -24,6 +25,7 @@ public class MustTest extends BaseTest {
         mustApi.addMust(GRAPE_NAME, 300, "liters", "savignon");
         sleep(3);
     }
+
     @AfterAll
     public static void cleanUp() {
         WinesApi winesApi = new WinesApi();
@@ -31,6 +33,7 @@ public class MustTest extends BaseTest {
         winesApi.deleteWine(GRAPE_NAME);
 
     }
+
     @Test
     public void test() {
         menu.open(MenuOptions.MUST);
@@ -42,5 +45,12 @@ public class MustTest extends BaseTest {
         sleep(1);
         int afterValue = winesPO.countWines();
         assertThat(afterValue, is(beforeValue - 1));
+    }
+
+    //Homework-Must total volume
+    @Test
+    public void checkMustTotalVolume() {
+
+        assertThat(mustPO.checkMustCountVolume(), is(true));
     }
 }

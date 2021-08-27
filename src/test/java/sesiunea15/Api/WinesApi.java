@@ -58,22 +58,25 @@ public class WinesApi {
         assertThat(response.getStatusCode(), is(200));
     }
 
-    public void addWine(String name, String bottVol, float volume, String unit, List<String> components, String type) {
+    public void addWine(String name, String type, int volume, String composition, String bottlingVolume) {
+
         Map<String, Object> volumeMap = new HashMap<>();
         volumeMap.put("value", volume);
-        volumeMap.put("unit", unit);
-        Map<String, Object> bodyMap = new HashMap<>();
-        bodyMap.put("name", name);
-        bodyMap.put("bottlingVolume", bottVol);
-        bodyMap.put("volume", volumeMap);
-        bodyMap.put("composition", components);
-        bodyMap.put("type", type);
+        volumeMap.put("unit", "liters");
+
+        Map<String, Object> wineBody = new HashMap<>();
+        wineBody.put("id", new Random().nextInt(99) + 1);
+        wineBody.put("name", name);
+        wineBody.put("volume", volumeMap);
+        wineBody.put("type", type);
+        wineBody.put("composition", composition);
+        wineBody.put("bottlingVolume", bottlingVolume);
+
         response = RestAssured.given()
                 .contentType(ContentType.JSON)
-                .body(bodyMap)
+                .body(wineBody)
                 .when()
                 .post(WINE_API_URL);
-        assertThat(response.getStatusCode(), is(200));
     }
 
     public String getWineId(String wineName) {
