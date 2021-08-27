@@ -47,4 +47,12 @@ public class MustTest extends BaseTest {
 
         assertThat(afterValue, is(beforeValue - 1));
     }
+
+
+    //TODO: Tema sesiunea 15
+    @Test
+    public void checkMustTotalVolume(){
+        assertThat(mustPO.checkMustCountVolume(), is(true));
+    }
+
 }
