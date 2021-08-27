@@ -29,8 +29,13 @@ public class GrapeTest extends BaseTest {
         menu.open(MenuOptions.GRAPE);
         grapesPO.addNewGrapeV2(GRAPE_NAME, "36", "rows", "80", "97");
         sleep(1);
+        //Check if total Rows equals total rows in table
+        assertThat(grapesPO.TotalRows(GRAPE_NAME), is(true));
+
         grapesPO.pickAndCrush(GRAPE_NAME);
         sleep(2);
         assertThat(mustPO.isMustAvailable(GRAPE_NAME), is(true));
+
+
     }
 }

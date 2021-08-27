@@ -46,5 +46,9 @@ public class MustTest extends BaseTest {
         int afterValue = winesPO.countWines();
 
         assertThat(afterValue, is(beforeValue - 1));
+
+        //Check must total volume equals total volume in table//
+        assertThat(mustPO.checkMustCountVolume(GRAPE_NAME), is(true));
+
     }
 }

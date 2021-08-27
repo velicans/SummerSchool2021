@@ -84,7 +84,7 @@ public class GrapesPO extends BasePO {
     }
 
     //Check that total rows value and type of grapes value are matching the values in table.
-    public boolean checkRowsTypes() {
+    public boolean checkRowsTypes(String grapeName) {
 
         boolean rowsTypesMatch = true;
         int numberOfGrapes = 0;
@@ -116,6 +116,32 @@ public class GrapesPO extends BasePO {
 
         }
         return rowsTypesMatch;
+    }
+
+    ///
+    public boolean TotalRows(String grapeName) {
+
+        boolean TotalRowsMatch = true;
+        int numberOfRows = 0;
+        int numberOfRowsTable = 0;
+
+
+            wait.until(ExpectedConditions.presenceOfElementLocated(tableRows));
+            List<WebElement> list = driver.findElements(tableRows);
+
+            numberOfRows = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(totalRows))).getText().replace("Total rows: ", ""));
+
+            for (WebElement row : list) {
+
+                numberOfRowsTable = numberOfRowsTable + Integer.parseInt(row.findElement(By.cssSelector(grapeQuantity)).getText().replace(" rows", "").replace(" barrows", "").replace(" cases", ""));
+
+            }
+
+            if (numberOfRows != numberOfRowsTable) {
+                TotalRowsMatch = false;
+            }
+
+        return TotalRowsMatch;
     }
 
 

@@ -19,7 +19,7 @@ public class MustPO extends BasePO {
     private String mustVolume = "td:nth-child(3)";
 
     //Check that must count value and must total volume matches the values from the table.
-    public boolean checkMustCountVolume() {
+    public boolean checkMustCountVolume(String grapeName) {
 
         boolean mustCountVolumeMatch = true;
         int mustNumber = 0;
