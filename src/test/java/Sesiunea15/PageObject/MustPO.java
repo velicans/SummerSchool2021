@@ -91,5 +91,22 @@ public class MustPO extends BasePO {
 
         return isAvailable;
     }
+    public boolean checkMustVolume(){
+        int volumeNumber = 0;
+        int volumeNumberTable = 0;
+        wait.until(ExpectedConditions.presenceOfElementLocated(tableRows));
+        List<WebElement> mustList = driver.findElements(tableRows);
+
+        volumeNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mustTotalVolume))).getText().replaceAll("[^0-9]",""));
+
+        for(WebElement row : mustList) {
+            volumeNumberTable += Integer.parseInt(row.findElement(By.cssSelector(mustVolume)).getText().replaceAll("[^0-9]",""));
+        }
+
+        if(volumeNumber != volumeNumberTable)
+            return false;
+        return true;
+
+    }
 
 }

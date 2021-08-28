@@ -1,9 +1,10 @@
 package Sesiunea15.Tests;
-
 import Sesiunea15.Api.MustApi;
 import Sesiunea15.enums.MenuOptions;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
+
+import java.time.Instant;
 
 import static Sesiunea15.helpers.Utils.sleep;
 import static org.hamcrest.CoreMatchers.is;
@@ -11,8 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GrapeTest extends BaseTest {
 
-    public static final String GRAPE_NAME = "Cabernet Sauvignon";
-
+    private static final String GRAPE_NAME = "GRAPE " + Instant.now();
 
     @AfterAll
     public static void cleanUp() {
@@ -22,7 +22,6 @@ public class GrapeTest extends BaseTest {
         mustApi.deleteMust(id);
 
     }
-
     @Test
     public void test() {
 
@@ -33,4 +32,12 @@ public class GrapeTest extends BaseTest {
         sleep(2);
         assertThat(mustPO.isMustAvailable(GRAPE_NAME), is(true));
     }
+
+    @Test
+    public void checkGrapesTotalRows(){
+        menu.open(MenuOptions.GRAPE);
+        sleep(2);
+        assertThat(grapesPO.checkGrapeTotalRows(),is(true));
+    }
+
 }

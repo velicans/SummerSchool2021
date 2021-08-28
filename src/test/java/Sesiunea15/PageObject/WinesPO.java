@@ -83,6 +83,24 @@ public class WinesPO extends BasePO {
             }
         }
     }
+    public boolean checkWineVolume(){
+        int volumeNumber =0;
+        int volumeNumberTable = 0;
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(tableRows));
+        List<WebElement> wineList = driver.findElements(tableRows);
+
+        volumeNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(winesTotalVolume))).getText().replaceAll("[^0-9]",""));
+
+        for(WebElement row : wineList) {
+            volumeNumberTable = volumeNumberTable + Integer.parseInt(row.findElement(By.cssSelector(winesVolume)).getText().replaceAll("[^0-9]",""));
+        }
+
+        if(volumeNumber != volumeNumberTable)
+            return false;
+
+        return true;
+    }
 
 
 }

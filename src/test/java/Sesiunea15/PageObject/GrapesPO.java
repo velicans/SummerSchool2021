@@ -18,6 +18,8 @@ public class GrapesPO extends BasePO {
     private String typeOfGrapes = "li:nth-child(1)";
     private String totalRows = "li:nth-child(2)";
     private String grapeQuantity = "td:nth-child(2)";
+    public String vineyardTotalRows = "li:nth-child(2)";
+
 
     //Add a new type of grape with ripeness of 97%.
     public void addNewGrapeV2(String grapeNameHelp, String grapeQuantityHelp, String grapeUnitHelp, String grapeAgeHelp, String grapeRipenessHelp) {
@@ -116,6 +118,22 @@ public class GrapesPO extends BasePO {
 
         }
         return rowsTypesMatch;
+    }
+
+    public boolean checkGrapeTotalRows(){
+
+        int rowsNumber = 0;
+        int totalRowsNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(vineyardTotalRows))).getText().replaceAll("[^0-9]",""));
+        wait.until(ExpectedConditions.presenceOfElementLocated(tableRows));
+        List<WebElement> grapeList = driver.findElements(tableRows);
+
+        for(WebElement row : grapeList) {
+            rowsNumber += Integer.parseInt(row.findElement(By.cssSelector(grapeQuantity)).getText().replaceAll("[^0-9]",""));
+        }
+        if(rowsNumber != totalRowsNumber)
+            return false;
+
+        return true;
     }
 
 
