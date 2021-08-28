@@ -13,11 +13,11 @@ import static Sesiunea15.helpers.Utils.sleep;
 
 public class BaseTest {
 
-    private static RemoteWebDriver driver;
-    MenuPO menu = new MenuPO();
-    GrapesPO grapesPO = new GrapesPO();
-    MustPO mustPO = new MustPO();
-    WinesPO winesPO = new WinesPO();
+    protected static RemoteWebDriver driver;
+    protected MenuPO menu = new MenuPO();
+    protected GrapesPO grapesPO = new GrapesPO();
+    protected MustPO mustPO = new MustPO();
+    protected WinesPO winesPO = new WinesPO();
 
     @BeforeAll
     public static void before() {
