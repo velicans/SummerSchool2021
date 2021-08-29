@@ -54,6 +54,32 @@ public class WinesPO extends BasePO {
         return winesCountVolumeMatch;
     }
 
+    public boolean checkWinesTotalVolume() {
+
+        boolean winesTotalVolumeMatch = true;
+        int volumeNumber = 0;
+        int volumeNumberTable = 0;
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wineRows)));
+        List<WebElement> list = driver.findElements(By.cssSelector(wineRows));
+
+        volumeNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(winesTotalVolume))).getText().replace("Volume: ", "").replace(" liters", ""));
+
+        for (WebElement row : list) {
+
+            volumeNumberTable = volumeNumberTable + Integer.parseInt(row.findElement(By.cssSelector(winesVolume)).getText().replace(" liters", ""));
+
+        }
+
+        if (volumeNumber != volumeNumberTable) {
+            winesTotalVolumeMatch = false;
+        }
+
+        return winesTotalVolumeMatch;
+
+    }
+
+
     public void setLabel(String grapeName, String name) {
         List<WebElement> winerows = driver.findElements(tableRows);
         for (WebElement row : winerows) {

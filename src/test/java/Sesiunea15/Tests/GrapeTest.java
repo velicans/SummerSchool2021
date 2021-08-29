@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GrapeTest extends BaseTest {
 
-    public static final String GRAPE_NAME = "Cabernet Sauvignon";
+    public static final String GRAPE_NAME = "Cabernet Sauvignon v6";
 
 
     @AfterAll
@@ -32,5 +32,15 @@ public class GrapeTest extends BaseTest {
         grapesPO.pickAndCrush(GRAPE_NAME);
         sleep(2);
         assertThat(mustPO.isMustAvailable(GRAPE_NAME), is(true));
+
     }
+
+    @Test
+    public void test2() {
+
+        menu.open(MenuOptions.GRAPE);
+        assertThat(grapesPO.checkGrapeTotalRows(), is(true));
+
+    }
+
 }

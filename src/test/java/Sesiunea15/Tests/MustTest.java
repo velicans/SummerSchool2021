@@ -44,7 +44,16 @@ public class MustTest extends BaseTest {
         menu.open(MenuOptions.MUST);
         sleep(1);
         int afterValue = winesPO.countWines();
-
         assertThat(afterValue, is(beforeValue - 1));
+
     }
+
+    @Test
+    public void test2() {
+
+        menu.open(MenuOptions.MUST);
+        assertThat(mustPO.checkMustTotalVolume(), is(true));
+
+    }
+
 }

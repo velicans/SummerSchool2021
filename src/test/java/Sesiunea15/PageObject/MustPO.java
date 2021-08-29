@@ -54,6 +54,32 @@ public class MustPO extends BasePO {
         return mustCountVolumeMatch;
     }
 
+    public boolean checkMustTotalVolume() {
+
+        boolean mustTotalVolumeMatch = true;
+        int volumeNumber = 0;
+        int volumeNumberTable = 0;
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wineRows)));
+        List<WebElement> list = driver.findElements(By.cssSelector(wineRows));
+
+        volumeNumber = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mustTotalVolume))).getText().replace("Must total volume: ", "").replace(" liters", ""));
+
+        for (WebElement row : list) {
+
+            volumeNumberTable = volumeNumberTable + Integer.parseInt(row.findElement(By.cssSelector(mustVolume)).getText().replace(" liters", ""));
+
+        }
+
+        if (volumeNumber != volumeNumberTable) {
+            mustTotalVolumeMatch = false;
+        }
+
+
+        return mustTotalVolumeMatch;
+
+    }
+
     //Select your must and Ferment it.
     public void selectAndFerment(String myGrape) {
 
