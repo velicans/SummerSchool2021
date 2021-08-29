@@ -24,7 +24,7 @@ public class MustApiTest {
     @Test
     void testMust() {
 
-        String name = "Must_Southern" + Instant.now();
+        String name = "Wine_Southern" + Instant.now();
         String type = "Dry";
 
         int value = 500;
