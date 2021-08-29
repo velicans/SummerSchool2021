@@ -118,5 +118,12 @@ public class GrapesPO extends BasePO {
         return rowsTypesMatch;
     }
 
+    //Total number of grapes rows
+    public int countGrapesRows () {
+        wait.until(ExpectedConditions.presenceOfElementLocated(tableRows));
+        List<WebElement> countGrapesRows = driver.findElements(tableRows);
+        return countGrapesRows.size();
+    }
+
 
 }

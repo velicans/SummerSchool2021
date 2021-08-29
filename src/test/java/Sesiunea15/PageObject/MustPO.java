@@ -92,4 +92,21 @@ public class MustPO extends BasePO {
         return isAvailable;
     }
 
+    public boolean mustTotalVolume() {
+
+        int mustTotalVolumeIndex=0;
+        int mustTotalCalculatedVolume=0;
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wineRows)));
+        List<WebElement> list = driver.findElements(By.cssSelector(wineRows));
+
+        mustTotalVolumeIndex = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(mustTotalVolume))).getText().split("")[2]);
+
+        for (WebElement row : list){
+            mustTotalCalculatedVolume +=Integer.parseInt(row.findElement(By.cssSelector(mustVolume)).getText().split("")[1]);
+        }
+        if (mustTotalVolumeIndex == mustTotalCalculatedVolume)
+            return true;
+        return false;
+    }
 }

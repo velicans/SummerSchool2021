@@ -84,5 +84,22 @@ public class WinesPO extends BasePO {
         }
     }
 
+    public boolean winesTotalVolume() {
+
+        int winesTotalVolumeIndex=0;
+        int winesTotalCalculatedVolume=0;
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wineRows)));
+        List<WebElement> list = driver.findElements(By.cssSelector(wineRows));
+
+        winesTotalVolumeIndex = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(winesTotalVolume))).getText().split("")[2]);
+
+        for (WebElement row : list){
+            winesTotalCalculatedVolume +=Integer.parseInt(row.findElement(By.cssSelector(winesTotalVolume)).getText().split("")[1]);
+        }
+        if (winesTotalVolumeIndex == winesTotalCalculatedVolume)
+            return true;
+        return false;
+    }
 
 }
