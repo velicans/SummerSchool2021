@@ -2,10 +2,10 @@ package Sesiunea15.helpers;
 
 public class Utils {
 
-    public static void sleep(int seconds) {
+    public static void sleep(int unitsOf200ms) {
 
         try {
-            Thread.sleep(seconds * 1000);
+            Thread.sleep(unitsOf200ms * 200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -26,11 +26,14 @@ public class GrapeTest extends BaseTest {
     @Test
     public void test() {
 
-        menu.open(MenuOptions.GRAPE);
+        int rows = grapesPO.getTotRows();
+        System.out.println(rows);
+
+        /*menu.open(MenuOptions.GRAPE);
         grapesPO.addNewGrapeV2(GRAPE_NAME, "36", "rows", "80", "97");
         sleep(1);
         grapesPO.pickAndCrush(GRAPE_NAME);
         sleep(2);
-        assertThat(mustPO.isMustAvailable(GRAPE_NAME), is(true));
+        assertThat(mustPO.isMustAvailable(GRAPE_NAME), is(true));*/
     }
 }

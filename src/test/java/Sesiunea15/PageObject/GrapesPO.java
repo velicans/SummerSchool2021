@@ -18,6 +18,7 @@ public class GrapesPO extends BasePO {
     private String typeOfGrapes = "li:nth-child(1)";
     private String totalRows = "li:nth-child(2)";
     private String grapeQuantity = "td:nth-child(2)";
+    private String grapeRows = "table > tbody > tr";
 
     //Add a new type of grape with ripeness of 97%.
     public void addNewGrapeV2(String grapeNameHelp, String grapeQuantityHelp, String grapeUnitHelp, String grapeAgeHelp, String grapeRipenessHelp) {
@@ -117,6 +118,16 @@ public class GrapesPO extends BasePO {
         }
         return rowsTypesMatch;
     }
-
+     public int getTotRows(){
+         int totRows = 0;
+         List<WebElement> rows = driver.findElements(By.cssSelector(grapeRows));
+         for(WebElement row : rows) {
+             String textRow = row.findElements(By.tagName("td")).get(1).getText();
+             int numRow = Integer.parseInt(textRow.substring(0, textRow.indexOf(" ")));
+             //System.out.println(numRow);
+             totRows+=numRow;
+         }
+         return totRows;
+     }
 
 }

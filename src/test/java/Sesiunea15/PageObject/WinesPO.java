@@ -84,5 +84,17 @@ public class WinesPO extends BasePO {
         }
     }
 
+    public int getWineVolumeTotal(){
+        int totVol = 0;
+        List<WebElement> volRows = driver.findElements(By.cssSelector(wineRows));
+        for(WebElement row : volRows) {
+            String textRow = row.findElements(By.tagName("td")).get(2).getText();
+            int numRow = Integer.parseInt(textRow.substring(0, textRow.indexOf(" ")));
+            //System.out.println(numRow);
+            totVol+=numRow;
+        }
+        return totVol;
+    }
+
 
 }

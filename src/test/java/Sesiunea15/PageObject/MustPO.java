@@ -17,6 +17,7 @@ public class MustPO extends BasePO {
     private String mustCount = "li:nth-child(1)";
     private String mustTotalVolume = "li:nth-child(2)";
     private String mustVolume = "td:nth-child(3)";
+    private String mustRows = "table > tbody > tr";
 
     //Check that must count value and must total volume matches the values from the table.
     public boolean checkMustCountVolume() {
@@ -90,6 +91,18 @@ public class MustPO extends BasePO {
         }
 
         return isAvailable;
+    }
+
+    public int getMustVolumeTotal(){
+        int totVol = 0;
+        List<WebElement> volRows = driver.findElements(By.cssSelector(mustRows));
+        for(WebElement row : volRows) {
+            String textRow = row.findElements(By.tagName("td")).get(2).getText();
+            int numRow = Integer.parseInt(textRow.substring(0, textRow.indexOf(" ")));
+            //System.out.println(numRow);
+            totVol+=numRow;
+        }
+        return totVol;
     }
 
 }
