@@ -33,4 +33,11 @@ public class GrapeTest extends BaseTest {
         sleep(2);
         assertThat(mustPO.isMustAvailable(GRAPE_NAME), is(true));
     }
+
+    @Test
+    public void testTotalRowsGrapes() {
+
+        menu.open(MenuOptions.GRAPE);
+        assertThat(grapesPO.checkRowsTypes(), is(true));
+    }
 }

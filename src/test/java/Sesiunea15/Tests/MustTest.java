@@ -47,4 +47,11 @@ public class MustTest extends BaseTest {
 
         assertThat(afterValue, is(beforeValue - 1));
     }
+
+    @Test
+    public void testMustVolume() {
+
+        menu.open(MenuOptions.MUST);
+        assertThat(mustPO.checkMustCountVolume(), is(true));
+    }
 }
