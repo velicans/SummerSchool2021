@@ -18,6 +18,7 @@ public class GrapesPO extends BasePO {
     private String typeOfGrapes = "li:nth-child(1)";
     private String totalRows = "li:nth-child(2)";
     private String grapeQuantity = "td:nth-child(2)";
+    private String totalRowsXPath = "//body/div[@id='root']/div[1]/section[1]/ul[1]/li[2]";
 
     //Add a new type of grape with ripeness of 97%.
     public void addNewGrapeV2(String grapeNameHelp, String grapeQuantityHelp, String grapeUnitHelp, String grapeAgeHelp, String grapeRipenessHelp) {
@@ -118,5 +119,25 @@ public class GrapesPO extends BasePO {
         return rowsTypesMatch;
     }
 
+        //homework session 15
+
+    public int getSumRows()
+    {
+        wait.until(ExpectedConditions.presenceOfElementLocated(tableRows));
+        List<WebElement> rows = driver.findElements(tableRows);
+        int sum = 0;
+        for (WebElement row : rows) {
+            WebElement rowQuantity= row.findElements(By.tagName("td")).get(1);
+            sum = sum + Integer.parseInt(rowQuantity.getText().replaceAll("[\\D]", ""));
+        }
+        return sum;
+    }
+
+    public int getTotalRows()
+    {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(totalRowsXPath)));
+        String typeOfGrapesValue= driver.findElement(By.xpath(totalRowsXPath)).getText();
+        return Integer.parseInt(typeOfGrapesValue.replaceAll("[\\D]", ""));
+    }
 
 }

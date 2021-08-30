@@ -1,10 +1,18 @@
 package Sesiunea15.PageObject;
 
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class MustPO extends BasePO {
 

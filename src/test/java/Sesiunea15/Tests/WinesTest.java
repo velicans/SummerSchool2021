@@ -8,20 +8,21 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
+import java.util.Arrays;
 
 import static Sesiunea15.helpers.Utils.sleep;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class MustTest extends BaseTest {
+public class WinesTest extends BaseTest {
 
     public static final String GRAPE_NAME = "Cabernet Sauvignon " + Instant.now();
 
 
     @BeforeAll
     public static void setUp() {
-        MustApi mustApi = new MustApi();
-        mustApi.addMust(GRAPE_NAME, 300, "liters", "savignon");
+        WinesApi winesApi = new WinesApi();
+        winesApi.addWine(GRAPE_NAME,"0.75",1,"liters", Arrays.asList(new String[]{"grapes"}), "merlot");
         sleep(3);
     }
 
@@ -34,27 +35,13 @@ public class MustTest extends BaseTest {
     }
 
     @Test
-    public void test() {
-
-        menu.open(MenuOptions.MUST);
-        sleep(1);
-        int beforeValue = winesPO.countWines();
-        mustPO.selectAndFerment(GRAPE_NAME);
-        sleep(1);
-        menu.open(MenuOptions.MUST);
-        sleep(1);
-
-        int afterValue = winesPO.countWines();
-
-        assertThat(afterValue, is(beforeValue - 1));
-    }
-
-    @Test
+    //homework session 15
     public void testMustTotalVolume() {
 
-        menu.open(MenuOptions.MUST);
+        menu.open(MenuOptions.WINES);
         sleep(1);
-        boolean isVolumeTheSame = mustPO.checkMustCountVolume();
+        boolean isVolumeTheSame = winesPO.checkWinesCountVolume();
         assertThat(isVolumeTheSame, is(true));
+
     }
 }

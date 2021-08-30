@@ -3,6 +3,7 @@ package Sesiunea15.Tests;
 import Sesiunea15.Api.MustApi;
 import Sesiunea15.enums.MenuOptions;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static Sesiunea15.helpers.Utils.sleep;
@@ -33,4 +34,24 @@ public class GrapeTest extends BaseTest {
         sleep(2);
         assertThat(mustPO.isMustAvailable(GRAPE_NAME), is(true));
     }
+
+    //homework session 15
+
+    //Check that total rows value and type of grapes value are matching the values in table.
+
+    @Test
+    public void testTotalRows() {
+
+        menu.open(MenuOptions.GRAPE);
+        grapesPO.getTotalRows();
+        sleep(1);
+        grapesPO.getSumRows();
+        sleep(2);
+        assertThat( grapesPO.getTotalRows()==grapesPO.getSumRows(), is(true));
+    }
+
+
+
+
+
 }
