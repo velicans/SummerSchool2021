@@ -118,5 +118,29 @@ public class GrapesPO extends BasePO {
         return rowsTypesMatch;
     }
 
+    // Session 15 assignment: Check that the total displayed number of Grape rows matches the number of rows in the table.
+    public boolean checkGrapeTotalRows() {
+
+        boolean totalRowsMatch = true;
+        int numberOfRows = 0;
+        int numberOfRowsTable = 0;
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(tableRows));
+        List<WebElement> list = driver.findElements(tableRows);
+
+        numberOfRows = Integer.parseInt(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(totalRows))).getText().replace("Total rows: ", ""));
+
+        for (WebElement row : list) {
+
+            numberOfRowsTable = numberOfRowsTable + Integer.parseInt(row.findElement(By.cssSelector(grapeQuantity)).getText().replace(" rows", "").replace(" barrows", "").replace(" cases", ""));
+
+        }
+
+        if (numberOfRows != numberOfRowsTable) {
+            totalRowsMatch = false;
+        }
+
+        return totalRowsMatch;
+    }
 
 }
